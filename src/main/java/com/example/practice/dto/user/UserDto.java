@@ -1,8 +1,7 @@
-package com.example.practice.dto;
+package com.example.practice.dto.user;
 
-import com.example.practice.entity.UserEntity;
+import com.example.practice.entity.user.UserEntity;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data

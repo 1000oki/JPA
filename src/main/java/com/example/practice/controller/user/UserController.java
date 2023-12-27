@@ -1,8 +1,9 @@
-package com.example.practice.controller;
+package com.example.practice.controller.user;
 
-import com.example.practice.dto.UserDto;
-import com.example.practice.service.UserService;
+import com.example.practice.dto.user.UserDto;
+import com.example.practice.service.user.UserService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     @Autowired
     private UserService userService;
 
-
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<String> saveUser(@Valid @RequestBody UserDto userDto){
+        log.info("userDto ? {}", userDto);
         String userId = userService.saveUser(userDto);
         return new ResponseEntity<>(userId, HttpStatus.OK);
     }
