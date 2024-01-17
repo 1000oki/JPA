@@ -1,25 +1,26 @@
-package com.example.practice.service;
+package com.example.practice.service.redis;
 
-import com.example.practice.component.KafkaProducer;
+import com.example.practice.model.ChatMessage;
 import com.example.practice.model.PostRequestModel;
 import com.example.practice.model.SendMessageRequestModel;
 import com.example.practice.model.TranslateResult;
 import com.example.practice.util.HttpConnection;
 import com.google.gson.Gson;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 @Slf4j
-public class KafkaProducerService {
-    private static final String TOPIC = "first";
-
+public class RedisPubService {
+    private final RedisTemplate<String, Object> redisTemplate;
     private static final String API_URL = "https://openapi.naver.com/v1/papago/n2mt";
 
     @Autowired
@@ -31,9 +32,12 @@ public class KafkaProducerService {
     @Value("${naver.client.secret}")
     private String clientSecret;
 
-    @Autowired
-    private KafkaProducer producer;
+    private static final String TOPIC = "topic1";
+    private static final String TRANSLATE_TOPIC = "translate";
 
+    public void sendMessage(ChatMessage chatMessage){
+        redisTemplate.convertAndSend(TOPIC, chatMessage);
+    }
 
     public void sendMessage(SendMessageRequestModel sendMessageRequestModel){
         String text = sendMessageRequestModel.getText();
@@ -59,7 +63,6 @@ public class KafkaProducerService {
         TranslateResult translateResult =
                 gson.fromJson(responseBody, TranslateResult.class);
 
-        producer.send(TOPIC, translateResult);
-
+        redisTemplate.convertAndSend(TRANSLATE_TOPIC, translateResult);
     }
 }

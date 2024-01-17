@@ -1,5 +1,6 @@
 package com.example.practice.model;
 
+import com.example.practice.model.TranslateMessage;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 

@@ -2,3 +2,17 @@ naver:
   client:
     id : wBnXOlDxPUAXVXImARmx
     secret : H8hkDwzPus
+
+
+kafka:
+  admin:
+    min-in-sync-replicas: 2
+  topic:
+    name: song
+    num-partitions: 3
+    replication-factor: 3
+  producer:
+    acks: all
+    retry: 3
+    max-in-flight-requests-per-connection: 3
+

@@ -1,8 +1,8 @@
-package com.example.practice.config;
+package com.example.practice.config.redis;
 
 import com.example.practice.model.ChatMessage;
-import com.example.practice.service.RedisSubService;
-import com.example.practice.service.TranslateRedisSubService;
+import com.example.practice.service.redis.RedisSubService;
+import com.example.practice.service.redis.TranslateRedisSubService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

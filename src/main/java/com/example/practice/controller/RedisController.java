@@ -2,7 +2,7 @@ package com.example.practice.controller;
 
 import com.example.practice.model.ChatMessage;
 import com.example.practice.model.SendMessageRequestModel;
-import com.example.practice.service.RedisPubService;
+import com.example.practice.service.redis.RedisPubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -9,7 +9,7 @@ spring:
       password: ''
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/jpa
+    url: jdbc:mysql://127.0.0.1:3306/kafka
     username: root
     password: test
   thymeleaf:
@@ -24,3 +24,6 @@ spring:
 #    producer:
 #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+kafka:
+  bootstrap-servers : localhost:9092,localhost:9093,localhost:9094
