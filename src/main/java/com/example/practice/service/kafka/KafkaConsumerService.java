@@ -1,11 +1,8 @@
 package com.example.practice.service.kafka;
 
 import com.example.practice.model.TranslateResult;
-import com.example.practice.model.song.InsertSongModel;
-import com.example.practice.model.song.SongModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +30,17 @@ public class KafkaConsumerService {
         log.info("topic02 = beforeLanguage : {}, afterLanguage : {}, translate messager : {}", beforeLanguage, afterLanguage, text);
     }
 
-    @KafkaListener(topics="${kafka.topic.name}", groupId = "cjs",
-            containerFactory = "kafkaListenerContainerFactoryMysql")
-    public void mysqlConsume(ConsumerRecord<String, InsertSongModel> consumerRecord){
-        InsertSongModel insertSongModel = consumerRecord.value();
+//    @KafkaListener(topics="${kafka.topic.name}", groupId = "cjs",
+//            containerFactory = "kafkaListenerContainerFactoryMysql")
+//    public void mysqlConsume(ConsumerRecord<String, SongEntity> consumerRecord){
+//        log.info("consumerRecord.value1 : {}", consumerRecord.value());
+        //SongEntity songEntity = consumerRecord.value().getClass();
+        /*log.info("consumerRecord.value1 : {}", consumerRecord.value());
 
-        log.info("consum insertSongModel : {}", insertSongModel);
-    }
+        log.info("consumer insertSongModel : {}", songEntity);
+        log.info("mysql에 적재 start : {}, {}절-{}", songEntity.getSongName(), songEntity.getVerse(), songEntity.getVerseRow());
+        songRepository.save(songEntity);
+        log.info("mysql에 적재 end : {}", songEntity.getSongName());*/
+//    }
 
 }

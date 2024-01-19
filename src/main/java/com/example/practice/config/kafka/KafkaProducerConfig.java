@@ -1,8 +1,7 @@
 package com.example.practice.config.kafka;
 
 import com.example.practice.model.TranslateResult;
-import com.example.practice.model.song.InsertSongModel;
-import com.example.practice.model.song.SongModel;
+import com.example.practice.model.song.SongEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -39,7 +38,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, InsertSongModel> mysqlFactory(){
+    public ProducerFactory<String, SongEntity> songFactory(){
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
@@ -59,7 +58,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, InsertSongModel> mysqlKafkaTemplate(){
-        return new KafkaTemplate<>(mysqlFactory());
+    public KafkaTemplate<String, SongEntity> songKafkaTemplate(){
+        return new KafkaTemplate<>(songFactory());
     }
 }

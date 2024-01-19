@@ -12,6 +12,14 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/kafka
     username: root
     password: test
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true # 하이버네이트가 실행한 모든 sql문 콘솔로 출력
+        format_sql: true # SQL문을 가독성있게 표현
+        use_sql_comments: true # 디버깅 청보 출력
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
   thymeleaf:
     cache: false
 #  kafka:

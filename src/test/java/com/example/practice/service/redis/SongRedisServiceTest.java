@@ -1,20 +1,23 @@
-package com.example.practice.service.kafka;
+package com.example.practice.service.redis;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @SpringBootTest(properties = "spring.profiles.active=local")
-class KafkaProducerServiceTest {
+class SongRedisServiceTest {
     @Autowired
-    private KafkaProducerService kafkaProducerService;
+    SongRedisService songRedisService;
 
     @Test
-    void sendSong() {
-        kafkaProducerService.sendSong();
+    void insertSong() {
+        songRedisService.insertSong();
+    }
+
+    @Test
+    void selectSong(){
+        songRedisService.selectSong();
     }
 }

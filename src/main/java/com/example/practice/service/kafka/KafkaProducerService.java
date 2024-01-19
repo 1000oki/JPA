@@ -4,18 +4,16 @@ import com.example.practice.component.KafkaProducer;
 import com.example.practice.model.PostRequestModel;
 import com.example.practice.model.SendMessageRequestModel;
 import com.example.practice.model.TranslateResult;
-import com.example.practice.model.song.InsertSongModel;
 import com.example.practice.model.song.LyricsModel;
+import com.example.practice.model.song.SongEntity;
 import com.example.practice.model.song.SongModel;
 import com.example.practice.util.HttpConnection;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,13 +76,12 @@ public class KafkaProducerService {
 
     }
 
-    public void sendMysql(){
-
-
+    public void sendSong(){
         // FileReader 생성
         Reader reader;
         try {
-            File file = resourceLoader.getResource("classpath:national_anthem.json").getFile();
+//            File file = resourceLoader.getResource("classpath:national_anthem.json").getFile();
+            File file = resourceLoader.getResource("classpath:idol.json").getFile();
             reader = new FileReader(file);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -103,18 +100,17 @@ public class KafkaProducerService {
             Integer verseRow = 0;
             for(String lyrics : verse.getLyrics()){
                 verseRow += 1;
-                InsertSongModel insertSongModel = new InsertSongModel();
-                insertSongModel.setSongName(songModel.getSongName());
-                insertSongModel.setVerse(verseNum);
-                insertSongModel.setVerseRow(verseRow);
-                insertSongModel.setLyrics(lyrics);
-
+                SongEntity songEntity = new SongEntity();
+                songEntity.setSongName(songModel.getSongName());
+                songEntity.setVerse(verseNum);
+                songEntity.setVerseRow(verseRow);
+                songEntity.setLyrics(lyrics);
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                producer.songModelSend(topicName, insertSongModel);
+                producer.songModelSend(topicName, songEntity);
             }
         }
     }
