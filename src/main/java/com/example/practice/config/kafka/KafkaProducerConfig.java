@@ -44,8 +44,9 @@ public class KafkaProducerConfig {
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
         // 멱등성(중복 방지) 적용 true일 경우 acks=all, retries>0, max.in.flight.requests.per.connection <= 5
-        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
-        props.put(ProducerConfig.ACKS_CONFIG, acks); // acknowledgement 설정 (all, 0, 1)
+        // 카프카 3.0.0부터는 enable.idempotence의 기본값은 true, acks = all로 변경되었음.
+//        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+//        props.put(ProducerConfig.ACKS_CONFIG, acks); // acknowledgement 설정 (all, 0, 1)
         props.put(ProducerConfig.RETRIES_CONFIG, retry); // acks 신호를 받지 못할 경우 몇번까지 retry 할 지
         props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, maxInFlightRequestsPerConnection);
 

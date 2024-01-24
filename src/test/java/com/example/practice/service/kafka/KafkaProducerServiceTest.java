@@ -15,6 +15,6 @@ class KafkaProducerServiceTest {
 
     @Test
     void sendSong() {
-        kafkaProducerService.sendSong();
+        kafkaProducerService.sendSong("idol");
     }
 }

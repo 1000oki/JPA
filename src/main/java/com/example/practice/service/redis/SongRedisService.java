@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class SongRedisService {
     @Autowired
     private SongRepository songRepository;
 
+    @Transactional
     public void insertSong(){
         log.info("[SongRedisService.insertSong] mysql에서 모든 데이터 가져오기 start");
         Sort sort = Sort.by(Sort.Direction.ASC, "songName", "verse", "verseRow");

@@ -76,12 +76,12 @@ public class KafkaProducerService {
 
     }
 
-    public void sendSong(){
+    public void sendSong(String fileName){
         // FileReader 생성
         Reader reader;
         try {
-//            File file = resourceLoader.getResource("classpath:national_anthem.json").getFile();
-            File file = resourceLoader.getResource("classpath:idol.json").getFile();
+            String path = "classpath:%s.json";
+            File file = resourceLoader.getResource(String.format(path, fileName)).getFile();
             reader = new FileReader(file);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
